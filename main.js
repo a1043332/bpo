@@ -32,42 +32,38 @@ function run() {
         //記下起始時間
         var tmp_time = open_time;
         arrival_time += (-1 / arrival_rate) * (Math.log(Math.random() / Math.log(2.718)) * 3600);
-        //找出服務生中最早的完成時間
-        for (j = servers_num; j > 0; j--) {
+        for (j = servers_num; j > 0; j--) {//找出服務生中最早的完成時間
             if (servers.end_time[j - 1] < min_end_time) {
                 who_service_now = j - 1;
                 min_end_time = servers.end_time[j - 1];
             }
         }
-
-        //如果進場時間大於上次服務時間(服務生有空)
-        if (servers.end_time[who_service_now] <= arrival_time) {
+           
+        if (servers.end_time[who_service_now] <= arrival_time) {//如果進場時間大於上次服務時間(服務生有空)
             start_time = arrival_time;
             servers.end_time[who_service_now] += servicetime;
             if (queue > 0) {
                 queue--;
             }
-        }
-        //沒有服務生有空
-        else {
+        } 
+        else {//沒有服務生有空
             start_time = servers.end_time[who_service_now];
             queue++;
             servers.end_time[who_service_now] += servicetime;
         }
 
-        //用queue中等待的數量去算原本等待中的人完成了嗎，如果完成了queue--
-        for (var j = queue; j > 0; j--) {
+        for (var j = queue; j > 0; j--) { //用queue中等待的數量去算原本等待中的人完成了嗎，如果完成了queue--
             if (customer_data.end_time[i - j - 1] < arrival_time) {
                 queue--;
             }
         }
-        
-       
 
+        //將舊時間變數套用上本次修改的時間
         servers.end_time[who_service_now] = start_time + servicetime
         min_end_time = start_time + servicetime;
         open_time += servicetime;
 
+        //轉換時間單位
         var dur = open_time - tmp_time;
         var arrivalhour = parseInt(arrival_time / 3600);
         var arrivalmin = parseInt(arrival_time / 60 % 60);
@@ -79,34 +75,43 @@ function run() {
         var endmin = parseInt(servers.end_time[who_service_now] / 60 % 60);
         var endsec = parseInt(servers.end_time[who_service_now] % 60);
 
+        //將本次顧客資料放入物件陣列
         customer_data.id.push(i);
         customer_data.arrival_time.push(arrival_time);
         customer_data.start_time.push(start_time);
         customer_data.end_time.push(servers.end_time[who_service_now]);
+
         //找出正在服務中的
-        var on_service="";
-        for(var j=servers_num;j>=1;j--){
-            // console.log(j)
-            // console.log(customer_data.id[i-queue-j])
-            console.log(customer_data.end_time[i-queue-j-1]);
-            if(customer_data.end_time[i-queue-j] >= customer_data.arrival_time[i-1]){
-                if(customer_data.id[i-queue-j]){
-                    if(on_service==""){
-                        on_service += +customer_data.id[i-queue-j];
+        var on_service = "";
+        for (var j = servers_num; j >= 1; j--) {
+            //比對目前的"i - queue的數量 - 人手數目"後的那項結束時間是否小於目前的等待時間，因為多人會有bug所以要再判斷+2
+            if (customer_data.end_time[i - queue - j] >= customer_data.arrival_time[i - 1]) {
+                //方便整理格式而已
+                if (customer_data.id[i - queue - j]) {
+                    if (on_service == "") {
+                        on_service += +customer_data.id[i - queue - j];
                     }
-                    else{
-                        on_service += ','+customer_data.id[i-queue-j];
-                    }             
+                    else {
+                        on_service += ',' + customer_data.id[i - queue - j];
+                    }
                 }
             }
-      
-          
+            else {
+                if (customer_data.end_time[i - queue - j + 2] >= customer_data.arrival_time[i - 1]) {
+                    //方便整理格式而已
+                    if (customer_data.id[i - queue - j]) {
+                        if (on_service == "") {
+                            on_service += +customer_data.id[i - queue - j];
+                        }
+                        else {
+                            on_service += ',' + customer_data.id[i - queue - j];
+                        }
+                    }
+                }
+            }
         }
-        
-        str += "<tr><td>" + i + "</td><td>" + queue + "</td><td>"+on_service+"</td><td>" + arrivalhour + ":" + arrivalmin + ":" + arrivalsec + "</td><td>" + starthour + ":" + startmin + ":" + startsec + "</td><td>" + endhour + ":" + endmin + ":" + endsec + "</td><td>" + dur + "</td><td>" + servers.name[who_service_now] + "</td></tr>";
+        str += "<tr><td>" + i + "</td><td>" + queue + "</td><td>" + on_service + "</td><td>" + arrivalhour + ":" + arrivalmin + ":" + arrivalsec + "</td><td>" + starthour + ":" + startmin + ":" + startsec + "</td><td>" + endhour + ":" + endmin + ":" + endsec + "</td><td>" + dur + "</td><td>" + servers.name[who_service_now] + "</td></tr>";
     }
-
     str += "</table>";
     document.getElementById("output").innerHTML = str;
-
 }
