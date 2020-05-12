@@ -85,14 +85,14 @@ function run() {
         var on_service = "";
         for (var j = servers_num; j >= 1; j--) {
             //比對目前的"i - queue的數量 - 人手數目"後的那項結束時間是否小於目前的等待時間，因為多人會有bug所以要再判斷+2
-            if (customer_data.end_time[i - queue - j] >= customer_data.arrival_time[i - 1]) {
+            if (customer_data.end_time[i - queue - j-1] >= customer_data.arrival_time[i - 1]) {
                 //方便整理格式而已
-                if (customer_data.id[i - queue - j]) {
+                if (customer_data.id[i - queue - j-1]) {
                     if (on_service == "") {
-                        on_service += +customer_data.id[i - queue - j];
+                        on_service += +customer_data.id[i - queue - j-1];
                     }
                     else {
-                        on_service += ',' + customer_data.id[i - queue - j];
+                        on_service += ',' + customer_data.id[i - queue - j-1];
                     }
                 }
             }
