@@ -1,0 +1,180 @@
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,600);
+@import url(https://fonts.googleapis.com/css?family=Cuprum:400,700);
+@import url(https://fonts.googleapis.com/css?family=Abel);
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+body{
+     font-family: Comic Sans MS;
+     line-height: 30px;
+   }
+
+.xiaohui img{
+    height: 374px;
+    width: 250px;
+    float:left;
+    margin: 0 auto;
+}   
+.genie img{
+    height: 374px;
+    width: 250px;
+    float:left;
+    margin: 0 auto;
+}   
+
+
+h1{
+    text-align: center;
+    font-size: 40px;
+    line-height: 60px;   
+}
+.table{
+    border-width:3px;
+    border-style:dashed;
+    border-color:#4CAF50;
+    padding:30px;
+    width: 350px;
+    height: auto;
+    text-align: center;
+    margin:0px auto;
+    float:left;
+    
+}
+
+.send {
+    font-family: Comic Sans MS;
+    display: inline-block;
+    padding: 15px 25px;
+    font-size: 24px;
+    cursor: pointer;
+    text-align: center;   
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+  }
+  
+  .send:hover {background-color: #3e8e41}
+  
+  .send:active {
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+/* .send{
+    cursor: pointer;
+    background-color: rgb(247, 147, 41);
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px; 
+}
+
+.send:hover{
+    cursor: pointer;
+    background-color: rgb(248, 191, 126);
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px; 
+    transition: all 0.5s;
+
+
+} */
+
+input[type=number] {
+ padding: 5px 12px;
+ margin: 10px 5px;
+ box-sizing: border-box; 
+}
+input[type=number]:focus {
+    border: 3px solid #4CAF50;
+  }
+
+
+table 
+{
+width:100%;
+}
+
+
+table {
+ width:100%;
+    margin:15px 0;
+    margin-top: 100px;
+}
+th {
+ background-color:#96A5FF;
+ color:#FFFFFF
+}
+table,table th,.table td
+{
+ font-size:0.95em;
+ text-align:center;
+ padding:4px;
+ border:1px solid #7387fe;
+ border-collapse:collapse
+}
+table tr:nth-child(odd){
+ background-color:#4CAF50;
+}
+.table tr:nth-child(even){
+ background-color:#fdfdfd;
+}
+.love_you{
+    margin: 0 auto;
+    width: 966px;
+    height: auto;
+    margin-bottom: 400px;
+}

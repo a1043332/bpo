@@ -4,22 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Queuing Models - 等候理論模擬器</title>
+    <link rel="stylesheet" type = "text/css" href="css.css">
 </head>
 <body>
-    
-        營業時間 <input type="number" name="" id=""class="time" value="0"></br>
-        Arrival rate (l) <input type="number" name="" class="AR" value="30"></br>
-        Service rate  (m)<input type="number" name="" class="SR" value="1.5"></br>
-        of servers (m)<input type="number" name="" class="S" value="1"></br>
-        模擬次數<input type="number" class="R" value="50"></br>
-        <input type="button" class="send" value="模擬" >
+    <h1>Welcome to Xiaohui Simulator!!!<br/>Please fill the following blanks</h1>
+    <div class="love_you">
+    <div class="xiaohui"><img src="genie.jpg" alt=""></div>
+    <div class="table">
 
+        Business hour <input type="time" name="" id=""class="time" value="10:30"></br>
+        Arrival rate (m) <input type="number" name="" class="AR" value="35"></br>
+        Service rate  (m)<input type="number" name="" class="SR" value="0.75"></br>
+        Servers <input type="number" name="" class="S" value="1"></br>
+        Simulation times<input type="number" class="R" value="50"></br>
+        <input type="button" class="send" value="simulate" >
 
+    </div>
+    <div class="genie"><img src="genie.jpg" alt=""></div>
 
-
-
+</div>
         
-        <div class="output" id="output"></div>
+        <div class=".table3_1 " id="output"></div>
    <script src="main.js"></script>
    
 </body>
