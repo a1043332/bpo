@@ -180,7 +180,7 @@ table tr:nth-child(odd){
 }
 .simulate_area{
   margin: 0 auto;
-  width: 1000px;
+  width: 1100px;
 }
 ._inqueue{
   float: left;
@@ -193,7 +193,7 @@ table tr:nth-child(odd){
 }
 ._inservice{
   float: left;
-  margin-left: 50px;
+  margin-left: 30px;
 }
 #inservice{
   background-color:#82FF82;
@@ -204,7 +204,7 @@ table tr:nth-child(odd){
 }
 ._out{
   float: left;
-  margin-left: 50px;
+  margin-left: 30px;
 }
 #out{
   background-color:#30FFFF;
@@ -217,4 +217,7 @@ table tr:nth-child(odd){
   text-align:center;
   margin: 0 auto; 
   width: 100px;
+}
+.clear{
+  clear:both;
 }
