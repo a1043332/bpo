@@ -1,15 +1,22 @@
-var send = document.querySelector('.send');
 var q_count = 0;
 var s_count = 0;
 var o_count = 0;
 var q_str='';
 var s_str='';
 var o_str='';
+var simulate_id = 0;
+var send = document.querySelector('.send');
+var addq = document.querySelector('.addq');
+var delqadds = document.querySelector('.delqadds');
+var dels = document.querySelector('.dels');
 send.addEventListener('click', run, false);
 send.addEventListener('click', clear_count, false);
+addq.addEventListener('click', run_addq, false);  
+delqadds.addEventListener('click', run_delq, false);
+dels.addEventListener('click', run_dels, false);
 
 
-var simulate_id = 0;
+
 function run() {
     var open_time = document.querySelector('.time').value;
     var open_time_hour = open_time[0] + open_time[1]
@@ -24,7 +31,7 @@ function run() {
 
     var servers_num = document.querySelector('.S').value; servers_num = parseInt(servers_num);
     var servers = { name: [], end_time: [] };
-    //用物件紀錄服務生名字和他上一次結束的時間，預設為0
+    //用物件陣列紀錄服務生名字和他上一次結束的時間，預設為0
     for (var i = 0; i < servers_num; i++) {
         servers.name.push('服務生' + (i + 1) + "號");
         servers.end_time.push(0);
@@ -67,21 +74,15 @@ function run() {
         if (servers.end_time[who_service_now] <= arrival_time) {//如果進場時間大於上次服務時間(服務生有空)
             start_time = arrival_time;
             servers.end_time[who_service_now] += servicetime;
-            // if (queue > 0) {
-            //     queue--;
-            // }
+          
         }
         else {//沒有服務生有空
             start_time = servers.end_time[who_service_now];
-            //   queue++;
+            
             servers.end_time[who_service_now] += servicetime;
         }
 
-        // for (var j = queue; j > 0; j--) { //用queue中等待的數量去算原本等待中的人完成了嗎，如果完成了queue--
-        //     if (customer_data.end_time[i - j ] < arrival_time) {
-        //         queue--;
-        //     }
-        // }
+       
 
         //將舊時間變數套用上本次修改的時間
         servers.end_time[who_service_now] = start_time + servicetime
@@ -164,22 +165,13 @@ function run() {
 
 
 
-
-    //動畫
-
-
-
+    //動畫動畫動畫動畫動畫動畫動畫動畫動畫動畫動畫動畫動畫動畫動畫動畫動畫動畫動畫動畫
     simulate_id++;
     var tmp_simulate_id = simulate_id;
     var count = 0;
-    //時間計算等動態表現
+    // setInterval重複跑function
     var tID = setInterval(myFunc01, speed);
     var time_str="";
-    // var customer_in_queue=[run];
-    // customer_in_queue.forEach(element => {
-    //     element=false;
-    // });
-
     function myFunc01() {
         document.getElementById("simulate").innerHTML = time_str;
         var now_time=open_time2+count;
@@ -193,35 +185,24 @@ function run() {
         for (var i = 0; i < run; i++) {
             if (parseInt(customer_data.arrival_time[i]) < temp_count && customer_data.inq[i] == 0) {
                 customer_data.inq[i] = 1;
-                run_addq();
-               
+                run_addq();              
             }
-
             if (parseInt(customer_data.start_time[i]) < temp_count && customer_data.ins[i] == 0) {
                 customer_data.ins[i] = 1;
-                run_delq();
-              
+                run_delq();             
             }
-
             if (parseInt(customer_data.end_time[i]) < temp_count && customer_data.out[i] == 0) {
                 customer_data.out[i] = 1;
-                run_dels();
-               
+                run_dels();         
             }
-
-
         }
-
 
         if (count >= (customer_data.end_time[run - 1] - open_time2) || tmp_simulate_id != simulate_id) {
             clearInterval(tID);
         }
     }
-
-
-
-
 }
+
 
 
 //指數分布
@@ -234,93 +215,64 @@ function randomExponential(rate, randomUniform) {
 
 }
 
-
-
-//找出正在服務中的
-// var on_service = "";
-// for (var j = servers_num; j >= 1; j--) {
-//     //比對目前的"i - queue的數量 - 人手數目"後的那項結束時間是否小於目前的等待時間，因為多人會有bug所以要再判斷+2
-//     if (customer_data.end_time[i - queue - j] >= customer_data.arrival_time[i - 1]) {
-//         //方便整理格式而已
-//         if (customer_data.id[i - queue - j]) {
-//             if (on_service == "") {
-//                 on_service += customer_data.id[i - queue - j];
-//             }
-//             else {
-//                 on_service += ' , ' + customer_data.id[i - queue - j];
-//             }
-//         }
-//     }
-//     else {
-//         if (customer_data.end_time[i - queue - j + 2] >= customer_data.arrival_time[i - 1]) {
-//             //方便整理格式而已
-//             if (customer_data.id[i - queue - j]) {
-//                 if (on_service == "") {
-//                     on_service += customer_data.id[i - queue - j];
-//                 }
-//                 else {
-//                     on_service += ' , ' + customer_data.id[i - queue - j];
-//                 }
-//             }
-//         }
-//     }
-// }
-
-
-    function clear_count() {
+//清除上一次模擬的紀錄
+function clear_count() {
         q_count = 0;
         s_count = 0;
         o_count = 0;
         q_str='';
         s_str='';
         o_str='';
-    }
-    var addq = document.querySelector('.addq');
-    addq.addEventListener('click', run_addq, false);
-    function run_addq() {
-        q_str = '';
-        q_count++;
-        for (var i = 0; i < q_count; i++) {
-            q_str += '<div class="div" style="width:50px;height:50px;float:left" ><img src="circle.png" alt=""width="50px" height="50px"></div>'
-        }
-        document.getElementById("inqueue").innerHTML = q_str;
-    }
-
-
-    var delqadds = document.querySelector('.delqadds');
-    delqadds.addEventListener('click', run_delq, false);
-    function run_delq() {
-        q_str = '';
-        if (q_count > 0) {
-            q_count--;
-        }
-        for (var i = 0; i < q_count; i++) {
-            q_str += '<div class="div" style="width:50px;height:50px;float:left" ><img src="circle.png" alt=""width="50px" height="50px"></div>'
-        }
-        s_str = '';
-        s_count++;
-        for (var i = 0; i < s_count; i++) {
-            s_str += '<div class="div" style="width:50px;height:50px;float:left" ><img src="circle.png" alt=""width="50px" height="50px"></div>'
-        }
         document.getElementById("inqueue").innerHTML = q_str;
         document.getElementById("inservice").innerHTML = s_str;
-    }
-
-    var dels = document.querySelector('.dels');
-    dels.addEventListener('click', run_dels, false);
-    function run_dels() {
-        s_str = '';
-        if (s_count > 0) {
-            s_count--;
-        }
-        for (var i = 0; i < s_count; i++) {
-            s_str += '<div class="div" style="width:50px;height:50px;float:left" ><img src="circle.png" alt=""width="50px" height="50px"></div>'
-        }
-        o_str = '';
-        o_count++;
-        for (var i = 0; i < o_count; i++) {
-            o_str += '<div class="div" style="width:50px;height:50px;float:left" ><img src="circle.png" alt=""width="50px" height="50px"></div>'
-        }
         document.getElementById("out").innerHTML = o_str;
-        document.getElementById("inservice").innerHTML = s_str;
+}
+    
+//新增到queue
+function run_addq() {
+    q_str = '';
+    q_count++;
+    for (var i = 0; i < q_count; i++) {
+        q_str += '<div class="div" style="width:50px;height:50px;float:left" ><img src="circle.png" alt=""width="50px" height="50px"></div>'
     }
+    document.getElementById("inqueue").innerHTML = q_str;    
+}
+
+
+//自queue中刪除，並新增到service
+function run_delq() {
+    q_str = '';
+    if (q_count > 0) {
+        q_count--;
+    }
+    for (var i = 0; i < q_count; i++) {
+        q_str += '<div class="div" style="width:50px;height:50px;float:left" ><img src="circle.png" alt=""width="50px" height="50px"></div>'
+    }
+
+    s_str = '';
+    s_count++;
+    for (var i = 0; i < s_count; i++) {
+        s_str += '<div class="div" style="width:50px;height:50px;float:left" ><img src="circle.png" alt=""width="50px" height="50px"></div>'
+    }
+    document.getElementById("inqueue").innerHTML = q_str;
+    document.getElementById("inservice").innerHTML = s_str;
+        
+}
+
+//自service中刪除，並新增到out
+function run_dels() {
+    s_str = '';
+    if (s_count > 0) {
+        s_count--;
+    }
+    for (var i = 0; i < s_count; i++) {
+        s_str += '<div class="div" style="width:50px;height:50px;float:left" ><img src="circle.png" alt=""width="50px" height="50px"></div>'
+    }
+    o_str = '';
+    o_count++;
+    for (var i = 0; i < o_count; i++) {
+        o_str += '<div class="div" style="width:50px;height:50px;float:left" ><img src="circle.png" alt=""width="50px" height="50px"></div>'
+    }
+    document.getElementById("inservice").innerHTML = s_str;
+    document.getElementById("out").innerHTML = o_str;
+}
