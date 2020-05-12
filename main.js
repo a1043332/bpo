@@ -25,8 +25,10 @@ function run() {
     var open_time2 = open_time;
     var arrival_rate = document.querySelector('.AR').value; arrival_rate = parseFloat(arrival_rate);
     var service_rate = document.querySelector('.SR').value; service_rate = parseFloat(service_rate);
+    var service_rate2 = document.querySelector('.SR2').value; service_rate2 = parseFloat(service_rate2);
     var speed = document.querySelector('.SS').value; speed = parseFloat(speed);
     var const_servicetime = 1 / service_rate * 60;
+    var const_servicetime2 = 1 / service_rate2 * 60;
 
 
     var servers_num = document.querySelector('.S').value; servers_num = parseInt(servers_num);
@@ -43,21 +45,38 @@ function run() {
     var queue = 0;
     //第一位客人的開始時間等於他到達的時間
     var start_time = arrival_time;
-    var str = "<table border='1'> <tr><td>客戶編號</td><td>排隊人數</td><td>誰正在被服務中</td><td>到達時間</td><td>開始時間</td><td>服務結束</td><td>服務時間</td><td>服務生</td></tr>";
+    var str = "<table border='1'> <tr><td>客戶編號</td><td>排隊人數</td><td>誰正在被服務中</td><td>到達時間</td><td>開始時間</td><td>服務結束</td><td>服務時間</td><td>其他資訊</td></tr>";
     var end_time = 0;
     var min_end_time = 1;
     var who_service_now = 0;
 
 
 
-    var customer_data = { id: [], arrival_time: [], start_time: [], end_time: [], inq: [], ins: [], out: [] };
+    var customer_data = { id: [], arrival_time: [], start_time: [], end_time: [], inq: [], ins: [], out: [],type:[] };
     for (var i = 1; i <= run; i++) {
-
+        var customer_type;
+        if(Math.random()>0.4){
+            customer_type=2;
+        }
+        else{
+            customer_type=1;
+        };
         //每次的服務時間
-        do {
-            var servicetime = parseInt(60 * randomExponential(service_rate));
-
-        } while (servicetime >= (const_servicetime + 20) || servicetime <= (const_servicetime - 20));
+        if(customer_type==2){
+            console.log('2號'+service_rate2);
+            do {
+                var servicetime = parseInt(60 * randomExponential(service_rate2));
+    
+            } while (servicetime >= (const_servicetime2 + 20) || servicetime <= (const_servicetime2 - 20));
+        }
+        else{
+            console.log('1號'+service_rate);
+            do {
+                var servicetime = parseInt(60 * randomExponential(service_rate));
+    
+            } while (servicetime >= (const_servicetime + 20) || servicetime <= (const_servicetime - 20));
+        }
+        
 
 
         //記下起始時間
@@ -139,7 +158,7 @@ function run() {
         customer_data.inq.push(0);
         customer_data.ins.push(0);
         customer_data.out.push(0);
-
+        customer_data.type.push(customer_type);
         var in_queue_str = "";
         var max_id = 0;
         for (var j = 0; j < i; j++) {
@@ -158,7 +177,7 @@ function run() {
         }
 
         queue = customer_data.id[i - 1] - max_id;
-        str += "<tr><td>" + i + "</td><td>" + queue + "</td><td>" + in_queue_str + "</td><td>" + arrivalhour + ":" + arrivalmin + ":" + arrivalsec + "</td><td>" + starthour + ":" + startmin + ":" + startsec + "</td><td>" + endhour + ":" + endmin + ":" + endsec + "</td><td>" + dur + "</td><td>" + servers.name[who_service_now] + "</td></tr>";
+        str += "<tr><td>" + i + "</td><td>" + queue + "</td><td>" + in_queue_str + "</td><td>" + arrivalhour + ":" + arrivalmin + ":" + arrivalsec + "</td><td>" + starthour + ":" + startmin + ":" + startsec + "</td><td>" + endhour + ":" + endmin + ":" + endsec + "</td><td>" + dur + "</td><td>被" + servers.name[who_service_now] +"服務，購買"+ customer_type+"號飲料</td></tr>";
     }
     str += "</table>";
     document.getElementById("output").innerHTML = str;

@@ -1,49 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Queuing Models - 等候理論模擬器</title>
-    <link rel="stylesheet" type = "text/css" href="css.css">
+    <link rel="stylesheet" type="text/css" href="css.css">
 </head>
-<body>
-    <h1>Welcome to Xiaohui Simulator!!!<br/>Please fill the following blanks</h1>
-    <div class="love_you">
-    <div class="xiaohui"><img src="genie.jpg" alt=""></div>
-    <div class="table">
 
-        Business hour <input type="time" name="" id=""class="time" value="10:30"></br>
-        Arrival rate (m) <input type="number" name="" class="AR" value="0.6"></br>
-        Service rate  (m)<input type="number" name="" class="SR" value="0.75"></br>
-        Servers <input type="number" name="" class="S" value="1"></br>
-        Simulation times<input type="number" class="R" value="50"></br>
-        Simulate speed(ms)<input type="number" class="SS" value="30"></br>
-        <input type="button" class="send" value="simulate" >
+<body>
+    <h1>Welcome to Xiaohui Simulator!!!<br />Please fill the following blanks</h1>
+    <div class="love_you">
+        <div class="xiaohui"><img src="genie.jpg" alt=""></div>
+        <div class="table">
+
+            Business hour <input type="time" name="" id="" class="time" value="10:30"></br>
+            Arrival rate (m) <input type="number" name="" class="AR" value="0.6"></br>
+            Service rate I (m)<input type="number" name="" class="SR" value="0.75"></br>
+            Service rate II (m)<input type="number" name="" class="SR2" value="0.46"></br>
+            Servers <input type="number" name="" class="S" value="2"></br>
+            Simulation times<input type="number" class="R" value="50"></br>
+            Simulate speed(ms)<input type="number" class="SS" value="30"></br>
+            <input type="button" class="send" value="simulate">
+
+        </div>
+        <div class="genie"><img src="genie.jpg" alt=""></div>
 
     </div>
-    <div class="genie"><img src="genie.jpg" alt=""></div>
+</br></br></br></br>
+    <div class="simulate_area" style="">
+        <div id="simulate">目前時間：00:00:00</div>
+        <div class="_inqueue">
+            <div class="aaa">排隊中</div>
+            <div id="inqueue"></div>
+        </div>
+        <div class="_inservice">
+            <div class="aaa">製作中</div>
+            <div id="inservice"></div>
+        </div>
+        <div class="_out">
+            <div class="aaa">完成</div>
+            <div id="out"></div>
+        </div>
 
-</div>
-<div class="simulate_area" style="">
-    <div id="simulate">目前時間：00:00:00</div>
-    <div class="_inqueue"><div class="aaa">排隊中</div><div id="inqueue" ></div></div> 
-    <div class="_inservice"><div class="aaa">製作中</div><div id="inservice"></div></div>
-    <div class="_out"><div class="aaa">完成</div><div id="out" ></div>
-</div>
+        <div class="clear"></div>
+    </div>
 
-<div class="clear" ></div>
-</div>
+    <div class=".table3_1 " id="output"></div>
 
-        <div class=".table3_1 " id="output"></div>
 
-        
-        <!-- <img src="circle.png" alt="" width="50px" height="50px"> -->
+    <!-- <img src="circle.png" alt="" width="50px" height="50px"> -->
 
-        <!-- <input type="button" class="addq" value="addq" >
+    <!-- <input type="button" class="addq" value="addq" >
         <input type="button" class="delqadds" value="delq+adds" >
         <input type="button" class="dels" value="dels" > -->
-        
-   <script src="main.js"></script>
-   
+
+    <script src="main.js"></script>
+
 </body>
+
 </html>
