@@ -62,7 +62,7 @@ function run() {
 
         //記下起始時間
         var tmp_time = open_time;
-        arrival_time += (-1 / arrival_rate) * (Math.log(Math.random() / Math.log(2.718)) * 3600);
+        arrival_time += (-1 / arrival_rate) * (Math.log(Math.random() / Math.log(2.718)) * 60);
         for (j = servers_num; j > 0; j--) {//找出服務生中最早的完成時間
             if (servers.end_time[j - 1] < min_end_time) {
                 who_service_now = j - 1;
