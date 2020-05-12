@@ -1,17 +1,24 @@
 var send = document.querySelector('.send');
+var q_count = 0;
+var s_count = 0;
+var o_count = 0;
 send.addEventListener('click', run, false);
+send.addEventListener('click', clear_count, false);
 
+
+var simulate_id = 0;
 function run() {
     var open_time = document.querySelector('.time').value;
-    var open_time_hour = open_time[0]+open_time[1]
-    var open_time_min = open_time[3]+open_time[4]
-    open_time = parseInt(open_time_hour*3600+open_time_min*60);
-    console.log(open_time);
+    var open_time_hour = open_time[0] + open_time[1]
+    var open_time_min = open_time[3] + open_time[4]
+    open_time = parseInt(open_time_hour * 3600 + open_time_min * 60);
+    var open_time2 = open_time;
     var arrival_rate = document.querySelector('.AR').value; arrival_rate = parseFloat(arrival_rate);
     var service_rate = document.querySelector('.SR').value; service_rate = parseFloat(service_rate);
+    var speed = document.querySelector('.SS').value; speed = parseFloat(speed);
     var const_servicetime = 1 / service_rate * 60;
- 
- 
+
+
     var servers_num = document.querySelector('.S').value; servers_num = parseInt(servers_num);
     var servers = { name: [], end_time: [] };
     //用物件紀錄服務生名字和他上一次結束的時間，預設為0
@@ -33,16 +40,16 @@ function run() {
 
 
 
-    var customer_data = { id: [], arrival_time: [], start_time: [], end_time: [] };
+    var customer_data = { id: [], arrival_time: [], start_time: [], end_time: [], inq: [], ins: [], out: [] };
     for (var i = 1; i <= run; i++) {
-       
+
         //每次的服務時間
-        do{
-            var servicetime =parseInt(60*randomExponential(service_rate)) ;
-            
-        }while(servicetime >= (const_servicetime+20) || servicetime <= (const_servicetime-20) );
-      
-        
+        do {
+            var servicetime = parseInt(60 * randomExponential(service_rate));
+
+        } while (servicetime >= (const_servicetime + 20) || servicetime <= (const_servicetime - 20));
+
+
         //記下起始時間
         var tmp_time = open_time;
         arrival_time += (-1 / arrival_rate) * (Math.log(Math.random() / Math.log(2.718)) * 3600);
@@ -50,7 +57,7 @@ function run() {
             if (servers.end_time[j - 1] < min_end_time) {
                 who_service_now = j - 1;
                 min_end_time = servers.end_time[j - 1];
-               
+
             }
         }
 
@@ -63,7 +70,7 @@ function run() {
         }
         else {//沒有服務生有空
             start_time = servers.end_time[who_service_now];
-         //   queue++;
+            //   queue++;
             servers.end_time[who_service_now] += servicetime;
         }
 
@@ -125,25 +132,27 @@ function run() {
         customer_data.arrival_time.push(arrival_time);
         customer_data.start_time.push(start_time);
         customer_data.end_time.push(servers.end_time[who_service_now]);
+        customer_data.inq.push(0);
+        customer_data.ins.push(0);
+        customer_data.out.push(0);
 
+        var in_queue_str = "";
+        var max_id = 0;
+        for (var j = 0; j < i; j++) {
 
-        var in_queue_str="";
-        var max_id=0;
-        for(var j =0;j<i;j++){
-        
-          if( customer_data.arrival_time[i - 1] >= customer_data.start_time[j] && customer_data.arrival_time[i - 1] <= customer_data.end_time[j]){
-            if( customer_data.id[j]>max_id){
-                max_id=customer_data.id[j];
+            if (customer_data.arrival_time[i - 1] >= customer_data.start_time[j] && customer_data.arrival_time[i - 1] <= customer_data.end_time[j]) {
+                if (customer_data.id[j] > max_id) {
+                    max_id = customer_data.id[j];
+                }
+                if (in_queue_str == "") {
+                    in_queue_str += customer_data.id[j].toString();
+                }
+                else {
+                    in_queue_str += ' , ' + customer_data.id[j].toString();;
+                }
             }
-            if (in_queue_str == "") {
-            in_queue_str +=  customer_data.id[j].toString();
-             }
-            else {
-                in_queue_str += ' , ' +  customer_data.id[j].toString();;
-            }
-          }
         }
-        console.log(customer_data.id[i - 1], 'aaaa',max_id)
+
         queue = customer_data.id[i - 1] - max_id;
         str += "<tr><td>" + i + "</td><td>" + queue + "</td><td>" + in_queue_str + "</td><td>" + arrivalhour + ":" + arrivalmin + ":" + arrivalsec + "</td><td>" + starthour + ":" + startmin + ":" + startsec + "</td><td>" + endhour + ":" + endmin + ":" + endsec + "</td><td>" + dur + "</td><td>" + servers.name[who_service_now] + "</td></tr>";
     }
@@ -153,25 +162,64 @@ function run() {
 
 
 
-    // //動畫
-    // var count = 0;
-    // //時間計算等動態表現
-    // var tID = setInterval(myFunc01, 1000);
-    // var time_str;
-    // function myFunc01() {
-    //     document.getElementById("simulate").innerHTML = time_str;
-    //     time_str = '目前時間'+count+'秒' 
-    //     console.log("已經過了" + count + "秒");
-    //     count++;
-    //     if (count >= 99999) {
-    //         clearInterval(tID);
-    //     }
-    // }
+    //動畫
 
 
-    
-   
+
+    simulate_id++;
+    var tmp_simulate_id = simulate_id;
+    var count = 0;
+    //時間計算等動態表現
+    var tID = setInterval(myFunc01, speed);
+    var time_str="";
+    // var customer_in_queue=[run];
+    // customer_in_queue.forEach(element => {
+    //     element=false;
+    // });
+
+    function myFunc01() {
+        document.getElementById("simulate").innerHTML = time_str;
+        var now_time=open_time2+count;
+        var now_time_hour=parseInt(now_time/3600);
+        var now_time_min=parseInt(now_time/60%60);
+        var now_time_sec=parseInt(now_time%60);
+        time_str = '目前時間'+ now_time_hour+":"+now_time_min+':'+now_time_sec;
+        count++;
+        var temp_count = open_time2 + count;
+
+        for (var i = 0; i < run; i++) {
+            if (parseInt(customer_data.arrival_time[i]) < temp_count && customer_data.inq[i] == 0) {
+                customer_data.inq[i] = 1;
+                run_addq();
+               
+            }
+
+            if (parseInt(customer_data.start_time[i]) < temp_count && customer_data.ins[i] == 0) {
+                customer_data.ins[i] = 1;
+                run_delq();
+              
+            }
+
+            if (parseInt(customer_data.end_time[i]) < temp_count && customer_data.out[i] == 0) {
+                customer_data.out[i] = 1;
+                run_dels();
+               
+            }
+
+
+        }
+
+
+        if (count >= (customer_data.end_time[run - 1] - open_time2) || tmp_simulate_id != simulate_id) {
+            clearInterval(tID);
+        }
+    }
+
+
+
+
 }
+
 
 //指數分布
 function randomExponential(rate, randomUniform) {
@@ -179,38 +227,94 @@ function randomExponential(rate, randomUniform) {
     var U = randomUniform;
     if (typeof randomUniform === 'function') U = randomUniform();
     if (!U) U = Math.random();
-    return -Math.log(U)/rate;
-  
-  }
+    return -Math.log(U) / rate;
+
+}
 
 
 
-       //找出正在服務中的
-        // var on_service = "";
-        // for (var j = servers_num; j >= 1; j--) {
-        //     //比對目前的"i - queue的數量 - 人手數目"後的那項結束時間是否小於目前的等待時間，因為多人會有bug所以要再判斷+2
-        //     if (customer_data.end_time[i - queue - j] >= customer_data.arrival_time[i - 1]) {
-        //         //方便整理格式而已
-        //         if (customer_data.id[i - queue - j]) {
-        //             if (on_service == "") {
-        //                 on_service += customer_data.id[i - queue - j];
-        //             }
-        //             else {
-        //                 on_service += ' , ' + customer_data.id[i - queue - j];
-        //             }
-        //         }
-        //     }
-        //     else {
-        //         if (customer_data.end_time[i - queue - j + 2] >= customer_data.arrival_time[i - 1]) {
-        //             //方便整理格式而已
-        //             if (customer_data.id[i - queue - j]) {
-        //                 if (on_service == "") {
-        //                     on_service += customer_data.id[i - queue - j];
-        //                 }
-        //                 else {
-        //                     on_service += ' , ' + customer_data.id[i - queue - j];
-        //                 }
-        //             }
-        //         }
-        //     }
-        // }
+//找出正在服務中的
+// var on_service = "";
+// for (var j = servers_num; j >= 1; j--) {
+//     //比對目前的"i - queue的數量 - 人手數目"後的那項結束時間是否小於目前的等待時間，因為多人會有bug所以要再判斷+2
+//     if (customer_data.end_time[i - queue - j] >= customer_data.arrival_time[i - 1]) {
+//         //方便整理格式而已
+//         if (customer_data.id[i - queue - j]) {
+//             if (on_service == "") {
+//                 on_service += customer_data.id[i - queue - j];
+//             }
+//             else {
+//                 on_service += ' , ' + customer_data.id[i - queue - j];
+//             }
+//         }
+//     }
+//     else {
+//         if (customer_data.end_time[i - queue - j + 2] >= customer_data.arrival_time[i - 1]) {
+//             //方便整理格式而已
+//             if (customer_data.id[i - queue - j]) {
+//                 if (on_service == "") {
+//                     on_service += customer_data.id[i - queue - j];
+//                 }
+//                 else {
+//                     on_service += ' , ' + customer_data.id[i - queue - j];
+//                 }
+//             }
+//         }
+//     }
+// }
+
+
+    function clear_count() {
+        q_count = 0;
+        s_count = 0;
+        o_count = 0;
+    }
+    var addq = document.querySelector('.addq');
+    addq.addEventListener('click', run_addq, false);
+    function run_addq() {
+        var q_str = '';
+        q_count++;
+        for (var i = 0; i < q_count; i++) {
+            q_str += '<div class="div" style="width:50px;height:50px;float:left" ><img src="circle.png" alt=""width="50px" height="50px"></div>'
+        }
+        document.getElementById("inqueue").innerHTML = q_str;
+    }
+
+
+    var delqadds = document.querySelector('.delqadds');
+    delqadds.addEventListener('click', run_delq, false);
+    function run_delq() {
+        var q_str = '';
+        if (q_count > 0) {
+            q_count--;
+        }
+        for (var i = 0; i < q_count; i++) {
+            q_str += '<div class="div" style="width:50px;height:50px;float:left" ><img src="circle.png" alt=""width="50px" height="50px"></div>'
+        }
+        var s_str = '';
+        s_count++;
+        for (var i = 0; i < s_count; i++) {
+            s_str += '<div class="div" style="width:50px;height:50px;float:left" ><img src="circle.png" alt=""width="50px" height="50px"></div>'
+        }
+        document.getElementById("inqueue").innerHTML = q_str;
+        document.getElementById("inservice").innerHTML = s_str;
+    }
+
+    var dels = document.querySelector('.dels');
+    dels.addEventListener('click', run_dels, false);
+    function run_dels() {
+        var s_str = '';
+        if (s_count > 0) {
+            s_count--;
+        }
+        for (var i = 0; i < s_count; i++) {
+            s_str += '<div class="div" style="width:50px;height:50px;float:left" ><img src="circle.png" alt=""width="50px" height="50px"></div>'
+        }
+        var o_str = '';
+        o_count++;
+        for (var i = 0; i < o_count; i++) {
+            o_str += '<div class="div" style="width:50px;height:50px;float:left" ><img src="circle.png" alt=""width="50px" height="50px"></div>'
+        }
+        document.getElementById("out").innerHTML = o_str;
+        document.getElementById("inservice").innerHTML = s_str;
+    }

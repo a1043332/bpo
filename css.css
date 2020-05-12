@@ -178,3 +178,27 @@ table tr:nth-child(odd){
     height: auto;
     margin-bottom: 400px;
 }
+.simulate_area{
+  margin: 0 auto;
+  width: 1000px;
+}
+#inqueue{
+  background-color:#FFD382;
+  width: 300px;
+  height: 300px;
+  float: left;
+}
+#inservice{
+  background-color:#82FF82;
+  width: 300px;
+  height: 300px;
+  margin-left: 50px;
+  float: left;
+}
+#out{
+  background-color:#30FFFF;
+  width: 300px;
+  height: 300px;
+  margin-left: 50px;
+  float: left;
+}
