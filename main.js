@@ -2,6 +2,9 @@ var send = document.querySelector('.send');
 var q_count = 0;
 var s_count = 0;
 var o_count = 0;
+var q_str='';
+var s_str='';
+var o_str='';
 send.addEventListener('click', run, false);
 send.addEventListener('click', clear_count, false);
 
@@ -268,11 +271,14 @@ function randomExponential(rate, randomUniform) {
         q_count = 0;
         s_count = 0;
         o_count = 0;
+        q_str='';
+        s_str='';
+        o_str='';
     }
     var addq = document.querySelector('.addq');
     addq.addEventListener('click', run_addq, false);
     function run_addq() {
-        var q_str = '';
+        q_str = '';
         q_count++;
         for (var i = 0; i < q_count; i++) {
             q_str += '<div class="div" style="width:50px;height:50px;float:left" ><img src="circle.png" alt=""width="50px" height="50px"></div>'
@@ -284,14 +290,14 @@ function randomExponential(rate, randomUniform) {
     var delqadds = document.querySelector('.delqadds');
     delqadds.addEventListener('click', run_delq, false);
     function run_delq() {
-        var q_str = '';
+        q_str = '';
         if (q_count > 0) {
             q_count--;
         }
         for (var i = 0; i < q_count; i++) {
             q_str += '<div class="div" style="width:50px;height:50px;float:left" ><img src="circle.png" alt=""width="50px" height="50px"></div>'
         }
-        var s_str = '';
+        s_str = '';
         s_count++;
         for (var i = 0; i < s_count; i++) {
             s_str += '<div class="div" style="width:50px;height:50px;float:left" ><img src="circle.png" alt=""width="50px" height="50px"></div>'
@@ -303,14 +309,14 @@ function randomExponential(rate, randomUniform) {
     var dels = document.querySelector('.dels');
     dels.addEventListener('click', run_dels, false);
     function run_dels() {
-        var s_str = '';
+        s_str = '';
         if (s_count > 0) {
             s_count--;
         }
         for (var i = 0; i < s_count; i++) {
             s_str += '<div class="div" style="width:50px;height:50px;float:left" ><img src="circle.png" alt=""width="50px" height="50px"></div>'
         }
-        var o_str = '';
+        o_str = '';
         o_count++;
         for (var i = 0; i < o_count; i++) {
             o_str += '<div class="div" style="width:50px;height:50px;float:left" ><img src="circle.png" alt=""width="50px" height="50px"></div>'
