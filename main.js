@@ -31,7 +31,7 @@ function run() {
     var service_rate2 = document.querySelector('.SR2').value; service_rate2 = parseFloat(service_rate2);
     var typeI_rate = document.querySelector('.SRR').value; typeI_rate = parseFloat(typeI_rate);
     var typeII_rate = document.querySelector('.SR2R').value; typeII_rate = parseFloat(typeII_rate);
-    var speed = document.querySelector('.SS').value; speed = parseFloat(speed);
+    var speed = document.querySelector('.SS').value; speed = 1000-parseFloat(speed);
     var const_servicetime = 1 / service_rate * 60;
     var const_servicetime2 = 1 / service_rate2 * 60;
 
