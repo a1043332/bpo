@@ -258,9 +258,9 @@ function run() {
     var service_per_m = all_time/run/60;
     var avg_service_s = total_service_time/run;
     var avg_wait_s = total_wait_time/run;
-    document.getElementById("service_per_m").innerHTML = '平均每分鐘來'+service_per_m+'人';
-    document.getElementById("avg_service_s").innerHTML = '平均服務時間'+avg_service_s+'秒'
-    document.getElementById("avg_wait_s").innerHTML = '平均等待'+avg_wait_s+'秒'
+    document.getElementById("service_per_m").innerHTML = '平均每分鐘來'+service_per_m.toFixed(2)+'人';
+    document.getElementById("avg_service_s").innerHTML = '平均服務時間'+avg_service_s.toFixed(2)+'秒'
+    document.getElementById("avg_wait_s").innerHTML = '平均等待'+avg_wait_s.toFixed(2)+'秒'
 }
     //指數分布
     function randomExponential(rate, randomUniform) {
