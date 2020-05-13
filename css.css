@@ -48,18 +48,18 @@ table {
 
 body{
      font-family: Comic Sans MS;
-     line-height: 30px;
+     line-height:20px;
    }
 
 .xiaohui img{
-    height: 374px;
-    width: 250px;
+    height: 551px;
+    width: 275px;
     float:left;
     margin: 0 auto;
 }   
 .genie img{
-    height: 374px;
-    width: 250px;
+    height: 551px;
+    width: 275px;
     float:left;
     margin: 0 auto;
 }   
@@ -117,7 +117,6 @@ h1{
     display: inline-block;
     font-size: 16px; 
 }
-
 .send:hover{
     cursor: pointer;
     background-color: rgb(248, 191, 126);
@@ -129,8 +128,6 @@ h1{
     display: inline-block;
     font-size: 16px; 
     transition: all 0.5s;
-
-
 } */
 
 input[type=number] {
@@ -220,4 +217,8 @@ table tr:nth-child(odd){
 }
 .clear{
   clear:both;
+}
+
+.statistics,.simulate_area{
+  text-align: center;
 }
