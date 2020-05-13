@@ -9,15 +9,13 @@ var send = document.querySelector('.send');
 var addq = document.querySelector('.addq');
 var delqadds = document.querySelector('.delqadds');
 var dels = document.querySelector('.dels');
-//var SR_R = document.querySelector('.SR_R');
-//var SR2_R = document.querySelector('.SR2_R');
+
 send.addEventListener('click', run, false);
 send.addEventListener('click', clear_count, false);
 addq.addEventListener('click', run_addq, false);
 delqadds.addEventListener('click', run_delq, false);
 dels.addEventListener('click', run_dels, false);
-//SR_R.addEventListener('change', typeII_rate_Calculate , false);
-// parseFloat(document.querySelector('.SR_R').value)
+
 
 
 
@@ -257,13 +255,13 @@ function run() {
         total_service_time += customer_data.end_time[i] -customer_data.start_time[i]
     }
     var all_time = all_end_time - all_arrival_time;
-    var service_per_m = all_time/run/60
+    var service_per_m = all_time/run/60;
     var avg_service_s = total_service_time/run;
     var avg_wait_s = total_wait_time/run;
-    document.getElementById("service_per_m").innerHTML = '平均每分鐘服務'+service_per_m+'人';
+    document.getElementById("service_per_m").innerHTML = '平均每分鐘來'+service_per_m+'人';
     document.getElementById("avg_service_s").innerHTML = '平均服務時間'+avg_service_s+'秒'
     document.getElementById("avg_wait_s").innerHTML = '平均等待'+avg_wait_s+'秒'
-
+}
     //指數分布
     function randomExponential(rate, randomUniform) {
         rate = rate || 1;
@@ -276,6 +274,7 @@ function run() {
 
     //清除上一次模擬的紀錄
     function clear_count() {
+        console.log('ssss');
         q_count = 0;
         s_count = 0;
         o_count = 0;
@@ -335,4 +334,3 @@ function run() {
         document.getElementById("inservice").innerHTML = s_str;
         document.getElementById("out").innerHTML = o_str;
     }
-}
