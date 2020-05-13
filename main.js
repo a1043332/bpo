@@ -1,4 +1,4 @@
-var q_count = 0;
+﻿var q_count = 0;
 var s_count = 0;
 var o_count = 0;
 var q_str = '';
