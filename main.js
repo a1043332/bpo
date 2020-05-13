@@ -238,29 +238,30 @@ function run() {
             buy_II++;
         }
     });
-    document.getElementById("buy_I").innerHTML = '購買一號飲料的共有'+buy_I+'人';
-    document.getElementById("buy_II").innerHTML = '購買二號飲料的共有'+buy_II+'人'
-    var all_arrival_time=0
-    var all_end_time=0;
+    document.getElementById("buy_I").innerHTML = '購買一號飲料的共有 '+buy_I+' 人';
+    document.getElementById("buy_II").innerHTML = '購買二號飲料的共有 '+buy_II+' 人'
+    var first_arrival_time=0
+    var last_arrival_time=0;
     var total_wait_time=0;
     var total_service_time=0;
     for(var i =0 ; i<run;i++){
         if(i==0){
-            all_arrival_time = customer_data.arrival_time[i];
+            first_arrival_time = customer_data.arrival_time[i];
         }
         if(i==(run-1)){
-            all_end_time = customer_data.end_time[i];
+            last_arrival_time = customer_data.arrival_time[i];
         }
         total_wait_time += customer_data.start_time[i] - customer_data.arrival_time[i];
         total_service_time += customer_data.end_time[i] -customer_data.start_time[i]
     }
-    var all_time = all_end_time - all_arrival_time;
+    
+    var all_time = last_arrival_time - first_arrival_time;
     var service_per_m = all_time/run/60;
     var avg_service_s = total_service_time/run;
     var avg_wait_s = total_wait_time/run;
-    document.getElementById("service_per_m").innerHTML = '平均每分鐘來'+service_per_m.toFixed(2)+'人';
-    document.getElementById("avg_service_s").innerHTML = '平均服務時間'+avg_service_s.toFixed(2)+'秒'
-    document.getElementById("avg_wait_s").innerHTML = '平均等待'+avg_wait_s.toFixed(2)+'秒'
+    document.getElementById("service_per_m").innerHTML = '平均每分鐘來 '+service_per_m.toFixed(2)+' 人';
+    document.getElementById("avg_service_s").innerHTML = '平均服務時間 '+avg_service_s.toFixed(2)+' 秒'
+    document.getElementById("avg_wait_s").innerHTML = '平均等待 '+avg_wait_s.toFixed(2)+' 秒'
 }
     //指數分布
     function randomExponential(rate, randomUniform) {
