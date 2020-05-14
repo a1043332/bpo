@@ -6,9 +6,7 @@ var s_str = '';
 var o_str = '';
 var simulate_id = 0;
 var send = document.querySelector('.send');
-var addq = document.querySelector('.addq');
-var delqadds = document.querySelector('.delqadds');
-var dels = document.querySelector('.dels');
+
 
 send.addEventListener('click', run, false);
 send.addEventListener('click', clear_count, false);
