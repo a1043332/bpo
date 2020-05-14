@@ -39,7 +39,7 @@ function run() {
     var servers = { name: [], end_time: [] };
     //用物件陣列紀錄服務生名字和他上一次結束的時間，預設為0
     for (var i = 0; i < servers_num; i++) {
-        servers.name.push('服務生' + (i + 1) + "號");
+        servers.name.push('staff ' + (i + 1));
         servers.end_time.push(0);
     }
     var run = document.querySelector('.R').value;
@@ -181,7 +181,7 @@ function run() {
         }
 
         queue = customer_data.id[i - 1] - max_id;
-        str += "<tr><td>" + i + "</td><td>" + queue + "</td><td>" + in_queue_str + "</td><td>" + arrivalhour + ":" + arrivalmin + ":" + arrivalsec + "</td><td>" + starthour + ":" + startmin + ":" + startsec + "</td><td>" + endhour + ":" + endmin + ":" + endsec + "</td><td>" + dur + "</td><td>被" + servers.name[who_service_now] + "服務，購買" + customer_type + "號飲料</td></tr>";
+        str += "<tr><td>" + i + "</td><td>" + queue + "</td><td>" + in_queue_str + "</td><td>" + arrivalhour + ":" + arrivalmin + ":" + arrivalsec + "</td><td>" + starthour + ":" + startmin + ":" + startsec + "</td><td>" + endhour + ":" + endmin + ":" + endsec + "</td><td>" + dur + "</td><td>Served by " + servers.name[who_service_now] + "、Ordered drink " + customer_type + "</td></tr>";
     }
     str += "</table>";
     document.getElementById("output").innerHTML = str;
@@ -201,7 +201,7 @@ function run() {
         var now_time_hour = parseInt(now_time / 3600);
         var now_time_min = parseInt(now_time / 60 % 60);
         var now_time_sec = parseInt(now_time % 60);
-        time_str = '目前時間' + now_time_hour + ":" + now_time_min + ':' + now_time_sec;
+        time_str = 'Current time - ' + now_time_hour + ":" + now_time_min + ':' + now_time_sec;
         count++;
         var temp_count = open_time2 + count;
 
@@ -237,8 +237,8 @@ function run() {
             buy_II++;
         }
     });
-    document.getElementById("buy_I").innerHTML = '購買一號飲料的共有 '+buy_I+' 人';
-    document.getElementById("buy_II").innerHTML = '購買二號飲料的共有 '+buy_II+' 人'
+    document.getElementById("buy_I").innerHTML = 'There are '+buy_I+'  customers bought drink I';
+    document.getElementById("buy_II").innerHTML = 'There are '+buy_II+' customers bought drink II';
     var first_arrival_time=0
     var last_arrival_time=0;
     var total_wait_time=0;
@@ -258,9 +258,9 @@ function run() {
     var service_per_m = all_time/run/60;
     var avg_service_s = total_service_time/run;
     var avg_wait_s = total_wait_time/run;
-    document.getElementById("service_per_m").innerHTML = '平均每分鐘來 '+service_per_m.toFixed(2)+' 人';
-    document.getElementById("avg_service_s").innerHTML = '平均服務時間 '+avg_service_s.toFixed(2)+' 秒'
-    document.getElementById("avg_wait_s").innerHTML = '平均等待 '+avg_wait_s.toFixed(2)+' 秒'
+    document.getElementById("service_per_m").innerHTML = service_per_m.toFixed(2)+' customer come per minute';
+    document.getElementById("avg_service_s").innerHTML = 'Average service time '+avg_service_s.toFixed(2)+' seconds'
+    document.getElementById("avg_wait_s").innerHTML = 'Average waiting time '+avg_wait_s.toFixed(2)+' seconds'
 }
     //指數分布
     function randomExponential(rate, randomUniform) {
