@@ -183,7 +183,7 @@ table tr:nth-child(odd){
   float: left;
 }
 #inqueue{
-  background-color:#FFD382;
+  background-color:#f6d186;
   width: 300px;
   height: 300px;
  
@@ -193,7 +193,7 @@ table tr:nth-child(odd){
   margin-left: 50px;
 }
 #inservice{
-  background-color:#82FF82;
+  background-color:#fcf7bb;
   width: 300px;
   height: 300px;
 
@@ -204,7 +204,7 @@ table tr:nth-child(odd){
   margin-left: 50px;
 }
 #out{
-  background-color:#30FFFF;
+  background-color:#cbe2b0;
   width: 300px;
   height: 300px;
   
