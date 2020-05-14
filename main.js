@@ -50,7 +50,7 @@ function run() {
     var queue = 0;
     //第一位客人的開始時間等於他到達的時間
     var start_time = arrival_time;
-    var str = "<table border='1'> <tr><td>客戶編號</td><td>排隊人數</td><td>誰正在被服務中</td><td>到達時間</td><td>開始時間</td><td>服務結束</td><td>服務時間</td><td>其他資訊</td></tr>";
+    var str = "<table border='1'> <tr><td>Customer_ID</td><td>Wait</td><td>Serving</td><td>Arrival_time</td><td>Start_time</td><td>End_time</td><td>System_time(s)</td><td>Other</td></tr>";
     var end_time = 0;
     var min_end_time = 1;
     var who_service_now = 0;
