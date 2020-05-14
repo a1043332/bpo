@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Queuing Models - 等候理論模擬器</title>
+    <link rel="stylesheet" type="text/css" href="css.css">
+</head>
+
+<body>
+    
+    <h1>Welcome to Xiaohui Simulator!!!<br />Please fill the following blanks</h1>
+    <div class="love_you">
+        <div class="xiaohui"><a href="index.html"><img src="sss.png" alt=""></a></div>
+        <div class="table">
+
+            Business hour <input type="time" name="" id="" class="time" value="10:30"></br>
+            Arrival rate (m) <input type="number" name="" class="AR" value="0.6"  style="width: 75px;"></br>
+            Service rate I (m)<input type="number" name="" class="SR" value="0.75" style="width: 75px;">
+             <div id="_srr">購買比率<input type="number" class="SRR" id="SRR" max="100" min="0" value="40" style="width: 75px;">%</div>
+            <div class="clear"> </div>
+            Service rate II (m)<input type="number" name="" class="SR2" value="0.46" style="width: 75px;"> 
+             <div id="_sr2r">購買比率<input type="number" class="SR2R" id="SR2R"max="100" min="0" value="60" style="width: 75px;">%</div>
+            <div class="clear"> </div>
+            Servers <input type="number" name="" class="S" value="2" style="width: 75px;"></br>
+            Simulation times<input type="number" class="R" value="50" style="width: 75px;"></br>
+            Simulate speed<input type="range" class="SS" value="950" min="0" max="990"></br>
+            <input type="button" class="send" value="simulate">
+
+        </div>
+        <div class="genie"> <a href="index.html"> <img src="genie.jpg" alt=""></a></div>
+
+    </div>
+    <div class="clear"></div>
+<div class="statistics">模擬結果的一些統計 
+    <div class="buy_I"  id="buy_I"></div>
+    <div class="buy_II" id="buy_II"></div>
+    <div id="service_per_m"></div>
+    <div id="avg_service_s"></div>
+    <div id="avg_wait_s"></div>
+</div>  
+    <div class="simulate_area">
+        <div id="simulate">目前時間：00:00:00</div>
+        <div class="_inqueue">
+            <div class="aaa">排隊中</div>
+            <div id="inqueue"></div>
+        </div>
+        <div class="_inservice">
+            <div class="aaa">製作中</div>
+            <div id="inservice"></div>
+        </div>
+        <div class="_out">
+            <div class="aaa">完成</div>
+            <div id="out"></div>
+        </div>
+
+        <div class="clear"></div>
+    </div>
+
+    <div class=".table3_1 " id="output"></div>
+
+
+    <!-- <img src="circle.png" alt="" width="50px" height="50px"> -->
+
+    <!-- <input type="button" class="addq" value="addq" >
+        <input type="button" class="delqadds" value="delq+adds" >
+        <input type="button" class="dels" value="dels" > -->
+   
+    <script src="main.js"></script>
+    <script src="cal_rate.js"></script>
+
+</body>
+
+</html>

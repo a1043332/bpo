@@ -1,4 +1,4 @@
-﻿var q_count = 0;
+var q_count = 0;
 var s_count = 0;
 var o_count = 0;
 var q_str = '';
@@ -29,11 +29,20 @@ function run() {
     var arrival_rate = document.querySelector('.AR').value; arrival_rate = parseFloat(arrival_rate);
     var service_rate = document.querySelector('.SR').value; service_rate = parseFloat(service_rate);
     var service_rate2 = document.querySelector('.SR2').value; service_rate2 = parseFloat(service_rate2);
+    var order_rate = document.querySelector('.order').value; order_rate = parseFloat(order_rate);
+    var offline_service_rate = 1/(1/service_rate + 1/order_rate);
+    var offline_service_rate2 = 1/(1/service_rate2 + 1/order_rate);
     var typeI_rate = document.querySelector('.SRR').value; typeI_rate = parseFloat(typeI_rate);
     var typeII_rate = document.querySelector('.SR2R').value; typeII_rate = parseFloat(typeII_rate);
+   
     var speed = document.querySelector('.SS').value; speed = 1000-parseFloat(speed);
+    var online_rate = document.querySelector('.online_rate').value ;online_rate = parseFloat(online_rate);
     var const_servicetime = 1 / service_rate * 60;
     var const_servicetime2 = 1 / service_rate2 * 60;
+    var const_offline_servicetime = 1 / offline_service_rate * 60;
+    var const_offline_servicetime2 = 1 / offline_service_rate2 * 60;
+    
+    
 
     var servers_num = document.querySelector('.S').value; servers_num = parseInt(servers_num);
     var servers = { name: [], end_time: [] };
@@ -56,9 +65,16 @@ function run() {
 
 
 
-    var customer_data = { id: [], arrival_time: [], start_time: [], end_time: [], inq: [], ins: [], out: [], type: [] };
+    var customer_data = { id: [], arrival_time: [], start_time: [], end_time: [], inq: [], ins: [], out: [], type: [] ,online:[]};
     for (var i = 1; i <= run; i++) {
         var customer_type;
+        var customer_online;
+        if(Math.random() > (online_rate / 100)){
+            customer_online=0;
+        }
+        else{
+            customer_online=1;
+        }
         if (Math.random() > (typeI_rate / 100)) {
             customer_type = 2;
         }
@@ -66,15 +82,26 @@ function run() {
             customer_type = 1;
         };
         //每次的服務時間
-        if (customer_type == 2) {
-         
+        if (customer_type == 2 && customer_online==0) {
+            
+            do {
+                var servicetime = parseInt(60 * randomExponential(offline_service_rate2));
+
+            } while (servicetime >= (const_offline_servicetime2+ 20) || servicetime <= (const_offline_servicetime2- 20));
+        }
+        else if(customer_type == 2 && customer_online==1){
             do {
                 var servicetime = parseInt(60 * randomExponential(service_rate2));
 
             } while (servicetime >= (const_servicetime2 + 20) || servicetime <= (const_servicetime2 - 20));
         }
-        else {
-            
+        else if(customer_type == 1 && customer_online==0){
+            do {
+                var servicetime = parseInt(60 * randomExponential(offline_service_rate));
+
+            } while (servicetime >= (const_offline_servicetime + 20) || servicetime <= (const_offline_servicetime - 20));
+        }
+        else{
             do {
                 var servicetime = parseInt(60 * randomExponential(service_rate));
 
@@ -162,7 +189,8 @@ function run() {
         customer_data.inq.push(0);
         customer_data.ins.push(0);
         customer_data.out.push(0);
-        customer_data.type.push(customer_type);
+        customer_data.type.push(customer_type)
+        customer_data.online.push(customer_online);
         var in_queue_str = "";
         var max_id = 0;
         for (var j = 0; j < i; j++) {
@@ -179,9 +207,12 @@ function run() {
                 }
             }
         }
-
+        var _online="線上點單";
+        if(customer_online == 0){
+            _online="實體點單";
+        }
         queue = customer_data.id[i - 1] - max_id;
-        str += "<tr><td>" + i + "</td><td>" + queue + "</td><td>" + in_queue_str + "</td><td>" + arrivalhour + ":" + arrivalmin + ":" + arrivalsec + "</td><td>" + starthour + ":" + startmin + ":" + startsec + "</td><td>" + endhour + ":" + endmin + ":" + endsec + "</td><td>" + dur + "</td><td>被" + servers.name[who_service_now] + "服務，購買" + customer_type + "號飲料</td></tr>";
+        str += "<tr><td>" + i + "</td><td>" + queue + "</td><td>" + in_queue_str + "</td><td>" + arrivalhour + ":" + arrivalmin + ":" + arrivalsec + "</td><td>" + starthour + ":" + startmin + ":" + startsec + "</td><td>" + endhour + ":" + endmin + ":" + endsec + "</td><td>" + dur + "</td><td>被" + servers.name[who_service_now] + "服務，購買" + customer_type + "號飲料，"+_online+"</td></tr>";
     }
     str += "</table>";
     document.getElementById("output").innerHTML = str;
@@ -274,7 +305,7 @@ function run() {
 
     //清除上一次模擬的紀錄
     function clear_count() {
-        
+        console.log('ssss');
         q_count = 0;
         s_count = 0;
         o_count = 0;
