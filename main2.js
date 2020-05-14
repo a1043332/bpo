@@ -6,19 +6,10 @@ var s_str = '';
 var o_str = '';
 var simulate_id = 0;
 var send = document.querySelector('.send');
-
-
 send.addEventListener('click', run, false);
 send.addEventListener('click', clear_count, false);
-addq.addEventListener('click', run_addq, false);
-delqadds.addEventListener('click', run_delq, false);
-dels.addEventListener('click', run_dels, false);
-
-
-
 
 function run() {
-
     var open_time = document.querySelector('.time').value;
     var open_time_hour = open_time[0] + open_time[1]
     var open_time_min = open_time[3] + open_time[4]
@@ -304,7 +295,6 @@ function run() {
 
     //清除上一次模擬的紀錄
     function clear_count() {
-        console.log('ssss');
         q_count = 0;
         s_count = 0;
         o_count = 0;

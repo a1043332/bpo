@@ -6,21 +6,11 @@ var s_str = '';
 var o_str = '';
 var simulate_id = 0;
 var send = document.querySelector('.send');
-var addq = document.querySelector('.addq');
-var delqadds = document.querySelector('.delqadds');
-var dels = document.querySelector('.dels');
 
 send.addEventListener('click', run, false);
 send.addEventListener('click', clear_count, false);
-addq.addEventListener('click', run_addq, false);
-delqadds.addEventListener('click', run_delq, false);
-dels.addEventListener('click', run_dels, false);
-
-
-
 
 function run() {
-
     var open_time = document.querySelector('.time').value;
     var open_time_hour = open_time[0] + open_time[1]
     var open_time_min = open_time[3] + open_time[4]
