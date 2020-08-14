@@ -2,6 +2,16 @@
 <html lang="en">
 
 <head>
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-WVK9BN7');</script>
+    <!-- End Google Tag Manager -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Queuing Models - 等候理論模擬器</title>
@@ -9,19 +19,24 @@
 </head>
 
 <body>
-    
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WVK9BN7" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <h1>Welcome to Xiaohui Simulator!!!<br />Please fill the following blanks</h1>
     <div class="love_you">
         <div class="xiaohui"><a href="index.html"><img src="sss.png" alt=""></a></div>
         <div class="table">
 
             Business hour <input type="time" name="" id="" class="time" value="10:30"></br>
-            Arrival rate (m) <input type="number" name="" class="AR" value="0.6"  style="width: 75px;"></br>
+            Arrival rate (m) <input type="number" name="" class="AR" value="0.6" style="width: 75px;"></br>
             Service rate of Buying TypeI(m)<input type="number" name="" class="SR" value="0.75" style="width: 75px;">
-             <div id="_srr">Purchase probability - TypeI<input type="number" class="SRR" id="SRR" max="100" min="0" value="40" style="width: 75px;">%</div>
+            <div id="_srr">Purchase probability - TypeI<input type="number" class="SRR" id="SRR" max="100" min="0"
+                    value="40" style="width: 75px;">%</div>
             <div class="clear"> </div>
-            Service rate of Buying TypeII(m)<input type="number" name="" class="SR2" value="0.46" style="width: 75px;"> 
-             <div id="_sr2r">Purchase probability - TypeII<input type="number" class="SR2R" id="SR2R"max="100" min="0" value="60" style="width: 75px;">%</div>
+            Service rate of Buying TypeII(m)<input type="number" name="" class="SR2" value="0.46" style="width: 75px;">
+            <div id="_sr2r">Purchase probability - TypeII<input type="number" class="SR2R" id="SR2R" max="100" min="0"
+                    value="60" style="width: 75px;">%</div>
             <div class="clear"> </div>
             Servers <input type="number" name="" class="S" value="2" style="width: 75px;"></br>
             Simulation times<input type="number" class="R" value="50" style="width: 75px;"></br>
@@ -33,13 +48,14 @@
 
     </div>
     <div class="clear"></div>
-<div class="statistics" > <div class="stat" style="font-weight:bold;" > Some statistics result of simulation -</div> 
-    <div class="buy_I"  id="buy_I"></div>
-    <div class="buy_II" id="buy_II"></div>
-    <div id="service_per_m"></div>
-    <div id="avg_service_s"></div>
-    <div id="avg_wait_s"></div></br>
-</div>  
+    <div class="statistics">
+        <div class="stat" style="font-weight:bold;"> Some statistics result of simulation -</div>
+        <div class="buy_I" id="buy_I"></div>
+        <div class="buy_II" id="buy_II"></div>
+        <div id="service_per_m"></div>
+        <div id="avg_service_s"></div>
+        <div id="avg_wait_s"></div></br>
+    </div>
     <div class="simulate_area">
         <div id="simulate">Current time - 00:00:00</div>
         <div class="_inqueue">
@@ -66,7 +82,7 @@
     <!-- <input type="button" class="addq" value="addq" >
         <input type="button" class="delqadds" value="delq+adds" >
         <input type="button" class="dels" value="dels" > -->
-   
+
     <script src="main.js"></script>
     <script src="cal_rate.js"></script>
 
